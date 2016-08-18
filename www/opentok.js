@@ -192,7 +192,8 @@ getPosition = function(divName) {
 replaceWithVideoStream = function(divName, streamId, properties) {
   var element, internalDiv, typeClass, videoElement;
   typeClass = streamId === PublisherStreamId ? PublisherTypeClass : SubscriberTypeClass;
-  element = document.getElementById(divName);
+  if(typeof( divName ) == 'object' ) element = divName;
+  else element = document.getElementById(divName);
   element.setAttribute("class", "OT_root " + typeClass);
   element.setAttribute("data-streamid", streamId);
   element.style.width = properties.width + "px";
@@ -857,7 +858,6 @@ TBSubscriber = (function() {
       width = DefaultWidth;
       height = DefaultHeight;
     }
-    console.log( "#### MX ###### " , divName , stream.streamId);
     obj = replaceWithVideoStream(divName, stream.streamId, {
       width: width,
       height: height
